@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - actions-test-branch
 
 jobs:
   Echo-On-Commit:
@@ -13,9 +13,7 @@ jobs:
       - name: "Set flag from Commit"
         env:
           COMMIT_VAR: ${{ contains(github.event.head_commit.message, '[commit var]') }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
-          echo ${COMMIT_MESSAGE}
           if ${COMMIT_VAR} == true; then
             echo "::set-env name=flag::true"
             echo "flag set to true"
@@ -23,3 +21,7 @@ jobs:
             echo "::set-env name=flag::false"
             echo "flag set to false"
           fi
+      
+      - name: "Use flag if true"
+        if: env.flag
+        run: echo "Flag is available and true"
