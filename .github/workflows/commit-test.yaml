@@ -21,7 +21,3 @@ jobs:
             echo "::set-env name=flag::false"
             echo "flag set to false"
           fi
-      
-      - name: "Use flag if true"
-        if: env.flag
-        run: echo "Flag is available and true"
