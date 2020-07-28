@@ -12,7 +12,7 @@ jobs:
 
       - name: "Set flag from PR"
         env:
-          PR_VAR: ${{ contains(toJSON(github.event.pull_request.body), '[pr var]') }}
+          PR_VAR: ${{ contains(github.event.pull_request.body, '[pr var]') }}
           PR_BODY: ${{ github.event.pull_request.body }}
         run: |
           echo ${PR_BODY}
