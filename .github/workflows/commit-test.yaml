@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - actions-test-branch
+      - master
 
 jobs:
   Echo-On-Commit:
