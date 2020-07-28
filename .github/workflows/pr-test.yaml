@@ -4,7 +4,7 @@ on:
       - master
 
 jobs:
-  Echo-On-Commit:
+  Echo-On-PR:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Repository"
@@ -13,7 +13,9 @@ jobs:
       - name: "Set flag from PR"
         env:
           PR_VAR: ${{ contains(toJSON(github.event.pull_request.body), '[pr var]') }}
+          PR_BODY: ${{ toJSON(github.event.pull_request.body) }}
         run: |
+          echo ${PR_BODY}
           if ${PR_VAR} == true; then
             echo "::set-env name=flag::true"
             echo "flag set to true"
